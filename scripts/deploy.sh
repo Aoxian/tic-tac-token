@@ -6,5 +6,5 @@ set -eo pipefail
 . $(dirname $0)/common.sh
 
 # Deploy.
-GreeterAddr=$(deploy Greeter)
-log "Greeter deployed at:" $GreeterAddr
+TicTacTokenAddr=$(deploy TicTacToken)
+log "TicTacToken deployed at:" $TicTacTokenAddr
