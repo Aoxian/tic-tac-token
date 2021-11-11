@@ -1,14 +1,15 @@
-# <h1 align="center"> DappTools Template </h1>
+# <h1 align="center"> TicTacToken </h1>
 
-**Template repository for getting started quickly with DappTools**
+**A TicTacToe DApp**
+* utilizing [dapptools-template](https://github.com/gakonst/dapptools-template)
 
-![Github Actions](https://github.com/gakonst/dapptools-template/workflows/Tests/badge.svg)
+![Github Actions](https://github.com/Aoxian/tic-tac-token/workflows/Tests/badge.svg)
 
 ## Building and testing
 
 ```sh
-git clone https://github.com/gakonst/dapptools-template
-cd dapptools-template
+git clone https://github.com/Aoxian/tic-tac-token
+cd tic-tac-token
 make # This installs the project's dependencies.
 make test
 ```
