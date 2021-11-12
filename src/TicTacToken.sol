@@ -7,19 +7,30 @@ contract TicTacToken {
     uint256 public constant EMPTY = 0;
     uint256 public constant X = 1;
     uint256 public constant O = 2;
+    uint256 internal turns;
 
     function getBoard() public view returns (uint256[9] memory) {
         return board;
     }
 
     function markSpace(uint256 _space, uint256 _mark) public {
+        require(_validTurn(_mark), "Not your turn");
         require(_validMark(_mark), "Invalid Mark");
         require(_emptySpace(_space), "Already Marked");
+        turns++;
         board[_space] = _mark;
+    }
+
+    function currentTurn() public view returns (uint256) {
+        return (turns % 2 == 0) ? X : O;
     }
 
     function winner() public view returns (uint256) {
         return _checkWins();
+    }
+
+    function _validTurn(uint256 mark) internal view returns (bool) {
+        return currentTurn() == mark;
     }
 
     function _checkWins() internal view returns (uint256) {
