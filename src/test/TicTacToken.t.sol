@@ -43,18 +43,18 @@ contract TestTTT is TicTacTokenTest {
 
     function test_can_mark_space_with_X(uint256 space) public {
         if (space > 8) return;
-        uint256 mark = ttt.currentTurn();
-        ttt.markSpace(space, mark);
+        uint256 piece = ttt.currentTurn();
+        ttt.markSpace(space, piece);
 
-        assertEq(ttt.board(space), mark);
+        assertEq(ttt.board(space), piece);
     }
 
     function test_can_mark_space_with_O(uint256 space) public {
         if (space > 8) return;
-        uint256 mark = ttt.currentTurn();
-        ttt.markSpace(space, mark);
+        uint256 piece = ttt.currentTurn();
+        ttt.markSpace(space, piece);
 
-        assertEq(ttt.board(space), mark);
+        assertEq(ttt.board(space), piece);
     }
 
     function testFail_cannot_mark_space_with_other_symbol() public {
@@ -79,6 +79,10 @@ contract TestTTT is TicTacTokenTest {
         assertEq(ttt.currentTurn(), O);
         ttt.markSpace(2, O);
         assertEq(ttt.currentTurn(), X);
+    }
+
+    function testFail_checks_valid_space() public {
+        ttt.markSpace(10, X);
     }
 
     function test_checks_for_horizontal_win() public {

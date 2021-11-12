@@ -13,12 +13,13 @@ contract TicTacToken {
         return board;
     }
 
-    function markSpace(uint256 _space, uint256 _mark) public {
-        require(_validTurn(_mark), "Not your turn");
-        require(_validMark(_mark), "Invalid Mark");
+    function markSpace(uint256 _space, uint256 _piece) public {
+        require(_validTurn(_piece), "Not your turn");
+        require(_validSpace(_space), "Invalid Space");
+        require(_validPiece(_piece), "Invalid Piece");
         require(_emptySpace(_space), "Already Marked");
         turns++;
-        board[_space] = _mark;
+        board[_space] = _piece;
     }
 
     function currentTurn() public view returns (uint256) {
@@ -29,8 +30,20 @@ contract TicTacToken {
         return _checkWins();
     }
 
-    function _validTurn(uint256 mark) internal view returns (bool) {
-        return currentTurn() == mark;
+    function _validTurn(uint256 _piece) internal view returns (bool) {
+        return currentTurn() == _piece;
+    }
+
+    function _validSpace(uint256 _space) internal pure returns (bool) {
+        return _space < 9;
+    }
+
+    function _validPiece(uint256 _piece) internal pure returns (bool) {
+        return _piece == X || _piece == O;
+    }
+
+    function _emptySpace(uint256 _space) internal view returns (bool) {
+        return board[_space] == 0;
     }
 
     function _checkWins() internal view returns (uint256) {
@@ -70,13 +83,5 @@ contract TicTacToken {
 
     function _antiDiag() internal view returns (uint256) {
         return board[2] * board[4] * board[6];
-    }
-
-    function _emptySpace(uint256 _space) internal view returns (bool) {
-        return board[_space] == 0;
-    }
-
-    function _validMark(uint256 _mark) internal pure returns (bool) {
-        return _mark == X || _mark == O;
     }
 }
